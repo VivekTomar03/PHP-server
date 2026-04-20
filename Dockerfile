@@ -12,20 +12,23 @@ RUN apt-get update && apt-get install -y \
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set document root to public/apps
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public/apps
-
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
 COPY . /var/www/html/
 
 # Install PHP dependencies
 RUN cd /var/www/html/codeignitor-app && composer install --no-dev --optimize-autoloader
 
-RUN printf '<Directory ${APACHE_DOCUMENT_ROOT}>\n\tOptions Indexes FollowSymLinks\n\tAllowOverride All\n\tRequire all granted\n</Directory>\n' >> /etc/apache2/apache2.conf
+# Set document root to public/apps and enable rewrite
+RUN sed -i 's|/var/www/html|/var/www/html/public/apps|g' /etc/apache2/sites-available/000-default.conf
+
+# Allow .htaccess overrides
+RUN echo '<Directory /var/www/html/public/apps>\n\
+    Options Indexes FollowSymLinks\n\
+    AllowOverride All\n\
+    Require all granted\n\
+</Directory>' >> /etc/apache2/apache2.conf
 
 RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 755 /var/www/html/codeignitor-app/writable
 
 EXPOSE 80
 
