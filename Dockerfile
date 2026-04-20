@@ -28,7 +28,7 @@ RUN echo '<Directory /var/www/html/public/apps>\n\
 </Directory>' >> /etc/apache2/apache2.conf
 
 RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 755 /var/www/html/codeignitor-app/writable
+RUN chmod -R 777 /var/www/html/codeignitor-app/writable
 
 EXPOSE 80
 
