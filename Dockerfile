@@ -4,6 +4,9 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 RUN a2enmod rewrite
 
+# Install composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Set document root to public/apps
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public/apps
 
@@ -11,6 +14,9 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 COPY . /var/www/html/
+
+# Install PHP dependencies
+RUN cd /var/www/html/codeignitor-app && composer install --no-dev --optimize-autoloader
 
 RUN echo '<Directory ${APACHE_DOCUMENT_ROOT}>\n\
     Options Indexes FollowSymLinks\n\
