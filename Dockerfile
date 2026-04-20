@@ -1,8 +1,12 @@
 FROM php:8.2-apache
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-
-RUN a2enmod rewrite
+RUN apt-get update && apt-get install -y \
+    git \
+    zip \
+    unzip \
+    libzip-dev \
+    && docker-php-ext-install mysqli pdo pdo_mysql zip \
+    && a2enmod rewrite
 
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -18,11 +22,7 @@ COPY . /var/www/html/
 # Install PHP dependencies
 RUN cd /var/www/html/codeignitor-app && composer install --no-dev --optimize-autoloader
 
-RUN echo '<Directory ${APACHE_DOCUMENT_ROOT}>\n\
-    Options Indexes FollowSymLinks\n\
-    AllowOverride All\n\
-    Require all granted\n\
-</Directory>' >> /etc/apache2/apache2.conf
+RUN printf '<Directory ${APACHE_DOCUMENT_ROOT}>\n\tOptions Indexes FollowSymLinks\n\tAllowOverride All\n\tRequire all granted\n</Directory>\n' >> /etc/apache2/apache2.conf
 
 RUN chown -R www-data:www-data /var/www/html
 
