@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outfit Designer — Local Dev</title>
+<style>
+  body { margin: 0; background: #ffffff; }
+  .page-heading { text-align: center; padding: 40px 0 20px; font-size: 2rem; font-weight: 400; font-family: Noe, Georgia, "Times New Roman", serif; }
+</style>
+</head>
+<body>
+
+<!-- This mimics the Shopify page that embeds the outfit builder -->
+<h1 class="page-heading">Outfit Builder</h1>
+<div id="outfit-builder-anchor"></div>
+
+<script>
+// Same as inject-outfitbuilder.js but pointing to localhost
+const OB_CONFIG = {
+    base_url: 'http://localhost:8080/',
+    host: 'localhost'
+};
+
+const BUILDNO = "v=local";
+
+(function () {
+    const anchor = document.getElementById('outfit-builder-anchor');
+
+    const scriptsJS = [
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js',
+        'https://code.jquery.com/ui/1.13.2/jquery-ui.min.js',
+        'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
+        'https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js',
+        OB_CONFIG.base_url + 'assets/js/mccalls.js?' + BUILDNO,
+        OB_CONFIG.base_url + 'assets/js/designers-min.js?' + BUILDNO
+    ];
+
+    const scriptsCSS = [
+        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap-grid.min.css',
+        'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
+        'https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css',
+        OB_CONFIG.base_url + 'assets/css/fonts.css?' + BUILDNO,
+        OB_CONFIG.base_url + 'assets/css/designer.css?' + BUILDNO
+    ];
+
+    if (anchor) {
+        const loadScript = (src) => new Promise((resolve) => {
+            const s = document.createElement('script');
+            s.src = src;
+            s.async = false;
+            s.onload = resolve;
+            s.onerror = resolve; // continue even if one fails
+            document.body.appendChild(s);
+        });
+
+        const loadCSS = (href) => {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            document.head.appendChild(link);
+        };
+
+        const contentF = async () => {
+            try {
+                // Load CSS immediately (non-blocking)
+                scriptsCSS.forEach(loadCSS);
+
+                // Fetch wrapper HTML from CI4 (no DB queries — fast)
+                const response = await fetch(OB_CONFIG.base_url + 'index.php/shopify');
+                const html = await response.text();
+                anchor.innerHTML = html;
+
+                // Load scripts sequentially (order matters)
+                for (const src of scriptsJS) {
+                    await loadScript(src);
+                }
+
+            } catch (error) {
+                console.error('Outfit builder load error:', error);
+            }
+        };
+
+        contentF();
+    }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+:root {
+    --ico-view: url('../img/outfitdesigner/constants/ico-view.svg');
+    --carousel-next: url('../img/outfitdesigner/interface/carousel-next.png');
+    --carousel-prev: url('../img/outfitdesigner/interface/carousel-prev.png');
+    --new-overlay: url('../img/outfitdesigner/interface/new-overlay.png');
+    --label-toggle: url('../img/outfitdesigner/interface/label-toggle.png');
+
+    --dashright: url('../img/outfitdesigner/interface/outfitdesigner-dashright.png');
+    --dashleft: url('../img/outfitdesigner/interface/outfitdesigner-dashleft.png');
+
+    --icon-zoomout: url('../img/outfitdesigner/interface/icon-zoomout.png');
+    --ceraProWoff: url('../fonts/CeraPRO-Bold.woff');
+    --ceraProWoff2: url('../fonts/CeraPRO-Bold.woff2');
+
+    --font-family-heading: Noe, Georgia, "Times New Roman", serif;
+    /*--font-family-heading: Georgia, "Times New Roman", serif;*/
+    --font-family-body: CeraPRO,Helvetica, Arial, sans-serif;
+
+    --next-arrow: url('../img/outfitdesigner/interface/icon-next-arrow.svg');
+    --prev-arrow: url('../img/outfitdesigner/interface/icon-next-arrow.svg');
+
+    --icon-product-select-arrow: url('../img/outfitdesigner/interface/icon-next-arrow.svg');
+}
+
+@font-face {
+    font-family: 'CeraPRO';
+    src: url('../fonts/CeraPRO-Regular.woff2') format('woff2'),
+    url('../fonts/CeraPRO-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'CeraPRO';
+    src: url('../fonts/CeraPRO-Medium.woff2') format('woff2'),
+    url('../fonts/CeraPRO-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'CeraPRO';
+    src: url('../fonts/CeraPRO-Light.woff2') format('woff2'),
+    url('../fonts/CeraPRO-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'CeraPRO';
+    src: url('../fonts/CeraPRO-Bold.woff2') format('woff2'),
+    url('../fonts/CeraPRO-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noe';
+    src: url('../fonts/NoeDisplay-Regular.woff2') format('woff2'),
+    url('../fonts/NoeDisplay-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Noe';
+    src: url('../fonts/NoeDisplay-Bold.woff2') format('woff2'),
+    url('../fonts/NoeDisplay-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

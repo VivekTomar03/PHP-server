@@ -1,0 +1,1184 @@
+
+
+/* Reset staff */
+*, *::before,
+*::after {
+    box-sizing: border-box;
+}
+
+#sendEnquiryModal {
+    font-family: var(--font-family-body);
+    font-weight: 400;
+    font-size: 15px;
+}
+.float-right { float: right !important; }
+#sendFriendModal h3,
+#sendEnquiryModal h3 {
+    font-family: var(--font-family-heading);
+    font-size: 1.75rem;
+    margin-top: 0;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    outline: 0;
+}
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.modal.fade .modal-dialog {
+    transform: translate(0, -25%);
+}
+.modal.show .modal-dialog {
+    transform: translate(0, 0);
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: .5rem;
+    pointer-events: none;
+}
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 15px;
+}
+
+.form-wrapper label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group .btn {
+    display: inline-block;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    font-family: var(--font-family-body);
+}
+
+.form-group input[type="text"], .form-group input[type="email"], .form-group input[type="password"], .form-group textarea {
+    border: 1px solid #000;
+    border-radius: 0px;
+    font-size: 15px;
+    color: #000;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: 2.25rem;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #000;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+}
+textarea.form-control {
+    height: auto;
+}
+
+.selectric-wrapper {
+    border: 1px solid #dddddd;
+    margin-bottom: 15px;
+    position: relative;
+    cursor: pointer;
+}
+.selectric {
+    border: 1px solid #f2f1ec;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.selectric-wrapper .selectric {
+    padding: 5px 15px;
+    border: none;
+}
+.selectric .label {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 38px 0 0;
+    font-size: 15px;
+    line-height: 38px;
+    color: #000;
+    height: 38px;
+    user-select: none;
+}
+.selectric .button {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    background-color: #f2f1ec;
+    color: #f2f1ec;
+    text-align: center;
+    font: 0 / 0 a;
+}
+.selectric-wrapper .selectric .button {
+    background-image: var(--icon-product-select-arrow);
+    background-size: 13px 8px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    margin-top: 5px;
+}
+.selectric-items {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid #dddbce;
+    z-index: -1;
+    box-shadow: 0 0 10px -6px;
+}
+.selectric-items .selectric-scroll {
+    height: 100%;
+    overflow: auto;
+}
+.selectric-items ul,
+.selectric-items li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    line-height: 20px;
+    min-height: 20px;
+}
+.selectric-items li {
+    display: block;
+    padding: 10px;
+    color: #666;
+    cursor: pointer;
+}
+.selectric-input {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 1px !important;
+    height: 1px !important;
+    outline: none !important;
+    border: none !important;
+    background: none !important;
+}
+.selectric-hide-select {
+    position: relative;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+}
+.selectric-hide-select select {
+    position: absolute;
+    left: -100%;
+}
+.selectric-open {
+    z-index: 9999;
+}
+.selectric-open .selectric-items {
+    display: block;
+}
+
+@media (min-width: 544px) {
+    .modal-dialog {
+        max-width: 600px;
+        margin: 1.75rem auto;
+    }
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: .3rem;
+    outline: 0;
+}
+
+.fade:not(.show) {
+    opacity: 0;
+}
+.mt-30 {
+    margin-top: 30px !important;
+}
+.mt-25 {
+    margin-top: 25px !important;
+}
+.mt-15{
+    margin-top: 15px !important;
+}
+.collapse:not(.show) {
+    display: none;
+}
+.ui-autocomplete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+}
+.ui-front {
+    z-index: 100;
+}
+.ui-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    outline: 0;
+}
+.ui-widget {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+}
+.ui-widget-content {
+    border: 1px solid #c5c5c5;
+    background: #ffffff;
+    color: #333333;
+}
+
+.ui-menu .ui-menu-item {
+    margin: 0;
+    cursor: pointer;
+    list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+    padding: 5px 15px;
+}
+
+
+#sendFriendModal .modal-content,
+#sendEnquiryModal .modal-content {
+    background: #f2f2f0;
+}
+
+.outfitDesigner {
+    overflow: hidden;
+    font-family: var(--font-family-body);
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.outfitDesigner img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+.outfitDesigner h1,
+.outfitDesigner h2,
+.outfitDesigner h3,
+.outfitDesigner h4,
+.outfitDesigner h5,
+.outfitDesigner h6 {
+    font-family: var(--font-family-heading);
+    font-weight: 500;
+    line-height: 1.3;
+    margin-top: 0;
+}
+
+.outfitDesigner h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+}
+
+.outfitDesigner p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+#outfitDesigner #tags {
+    width: 100%;
+    font-family: var(--font-family-heading);
+    padding: 10px 15px;
+    color: #000;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    border: solid 1px #ddd;
+}
+
+#outfitDesigner .info-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 700px;
+}
+@media (min-width: 768px) {
+    #outfitDesigner .info-container {
+        height: 785px;
+        left: -30px;
+    }
+}
+
+.outfitDesigner a {
+    text-decoration: none;
+}
+
+.outfitDesigner .text-center {
+    text-align: center !important;
+}
+
+.outfitDesigner .d-md-none { display: block !important; }
+
+#outfitDesigner .codeContainer {
+    margin-top: 25px;
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    border: solid 1px #eee;
+}
+
+#outfitDesigner .codeContainer input {
+    width: 100%;
+    padding-right: 120px;
+    background: #fff;
+    padding: 9px;
+    border: 0;
+    font-family: var(--font-family-body);
+    font-weight: 700;
+}
+
+#outfitDesigner .codeContainer button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #fff;
+    border: 0;
+    border-left: 1px solid #eee;
+    color: #000;
+    padding: 6px 14px;
+    font-family: var(--font-family-heading);
+    font-weight: 400;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+@media(min-width: 768px) {
+    .outfitDesigner .d-md-none { display: none !important;}
+}
+
+.info-toggle {
+    width: 37px;
+    height: 30px;
+    background-image: var(--label-toggle);
+    background-position: right 0;
+    background-repeat: no-repeat;
+    background-size: 74px 30px;
+    position: absolute;
+    right: 4px;
+    cursor: pointer;
+    z-index: 9;
+}
+
+.page-outfit-builder .custom-liquid .container {
+    max-width: none;
+}
+
+.info-toggle.active {
+    background-position: left 0;
+}
+
+/**
+Inline CSS that was one the outfit builder page
+ */
+.container-fluid-xl {
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    max-width: 1400px;
+    margin: auto;
+}
+
+ul#hirebuytoggle {
+
+    margin: 0 0 20px 0;
+    padding: 0;
+    border-radius: 30px;
+    overflow: hidden;
+    display: inline-block;
+
+    background: #cdcdc0;
+    border: none;
+    height: auto;
+    line-height: 0;
+}
+
+ul#hirebuytoggle li {
+    border-radius: 30px;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+}
+
+ul#hirebuytoggle li a,
+ul#hirebuytoggle li span{
+    text-transform: uppercase;
+    font-family: "CeraPRO", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    padding: 25px 25px;
+    background: #cdcdc0;
+    color: #fff;
+    display: block;
+}
+
+ul#hirebuytoggle li.active a {
+    background: #585830;
+    color: #fff;
+    text-align: center;
+}
+
+.outfit-element-menu .arrow {
+    display: none;
+}
+
+#outfitDesignerMenu {
+    color: #585830;
+}
+
+#mobilepreview {
+    position: relative;
+    padding-left: 0vw;
+}
+
+#outfitDesigner #mobilepreview #previewimage {
+    height: 536px;
+}
+
+@media all and (max-width: 768px) {
+    #outfitDesigner #mobilepreview #previewimage img {
+        min-height: 250px !important;
+        height: auto !important;
+        display: block;
+    }
+}
+
+#outfitDesigner .outfit-element-menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+#outfitDesigner .outfit-element-menu li {
+    width: 12%;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    margin-right: 3px;
+}
+
+#outfitDesigner .outfit-element-menu li .arrow {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 50%;
+    right: -9px;
+    margin-top: -7.5px;
+    z-index: 10;
+    background-image: var(--next-arrow);
+    background-size: 15px 15px;
+}
+
+#outfitDesigner .outfit-element-menu li a {
+    margin: 20px;
+    box-shadow: rgba(99, 99, 99, 0) 0 4px 16px 0;
+    border-radius: 50px;
+    padding: 0;
+    height: 70px;
+    width: 70px;
+    border: none;
+    background: #f5f5f5;
+    text-decoration: none;
+    display: block;
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+}
+
+@media(min-width: 768px) and (max-width: 991px) {
+    #outfitDesigner .outfit-element-menu li a {
+        height: 60px;
+        width: 60px;
+    }
+}
+@media(min-width: 992px) {
+    #outfitDesigner .outfit-element-menu li a {
+        height: 80px;
+        width: 80px;
+    }
+}
+@media(min-width: 1200px) {
+    #outfitDesigner .outfit-element-menu li a {
+        height: 90px;
+        width: 90px;
+    }
+}
+#outfitDesigner .outfit-element-menu li.active a {
+    margin: 20px;
+    box-shadow: rgba(99, 99, 99, 0.5) 0 4px 16px 0;
+    background: #fff;
+    text-decoration: none;
+    color: #000;
+}
+
+#outfitDesigner .outfit-element-menu li:hover a {
+    margin: 20px;
+    box-shadow: rgba(99, 99, 99, 0.5) 0 4px 16px 0;
+}
+
+#outfitDesigner .outfit-element-menu li img {
+    width: 60%;
+    height: 60%;
+    margin-top: 20%;
+    opacity: 0.3;
+}
+
+#outfitDesigner .outfit-element-menu li.active img,
+#outfitDesigner .outfit-element-menu li:hover img {
+    opacity: 1;
+}
+
+.outfit-element-menu li .label {
+    display: none;
+}
+
+#outfitDesigner .outfit-element-menu li:last-of-type a {
+    border-right: none;
+}
+
+#outfitDesigner .stepno {
+    color: #585830;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#outfitDesigner .optionTitle h3 {
+    color: #585830;
+    font-size: 30px;
+    font-family: var(--font-family-heading);
+    font-weight: 500;
+}
+
+#outfitDesigner h4.panel-title {
+    border-top: 0;
+    font-family: var(--font-family-body);
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #000;
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+#outfitDesigner h4.panel-title span,
+#outfitDesigner h4.panel-title a {
+    color: #585830 !important;
+    padding-top: 15px;
+    padding-bottom: 13px;
+}
+
+#outfitDesigner .price {
+    color: #585830;
+    font-size: 30px;
+    font-family: var(--font-family-heading);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 10px;
+}
+.outfit-info {
+    text-align: left;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    position: relative;
+}
+@media (min-width: 768px) {
+    .outfit-info {
+        min-height: 785px;
+    }
+}
+
+.outfit-info .outfit-element {
+    position: absolute;
+    color: #585830;
+    font-size: 15px;
+    font-family: var(--font-family-body);
+    font-weight: 700;
+    line-height: 1.2em;
+}
+.outfit-info .outfit-kilt {
+    top: 55%;
+    right: -30px;
+    width: 120px;
+    padding-left: 30px;
+    text-align: left;
+    background-image: var(--dashright);
+    background-position: left 5px;
+    background-repeat: no-repeat;
+    background-size: 15px 1px;
+}
+
+.outfit-info .outfit-flashes {
+    top: 75%;
+    right: -30px;
+    width: 120px;
+    padding-left: 30px;
+    text-align: left;
+    background-image: var(--dashright);
+    background-position: left 5px;
+    background-repeat: no-repeat;
+    background-size: 15px 1px;
+}
+
+.outfit-info .outfit-sporran {
+    top: 55%;
+    left: -30px;
+    width: 120px;
+    padding-right: 30px;
+    text-align: right;
+    background-image: var(--dashleft);
+    background-position: right 5px;
+    background-repeat: no-repeat;
+    background-size: 15px 1px;
+}
+.outfit-info .outfit-hose {
+    top: 75%;
+    left: -20px;
+    width: 150px;
+    padding-right: 30px;
+    text-align: right;
+    background-image: var(--dashleft);
+    background-position: right 5px;
+    background-repeat: no-repeat;
+    background-size: 15px 1px;
+}
+.outfit-info .outfit-shirt {
+    top: 17%;
+    right: 0px;
+    width: 120px;
+    padding-left: 30px;
+    text-align: left;
+    background-image: var(--dashright);
+    background-position: left 5px;
+    background-repeat: no-repeat;
+    background-size: 15px 1px;
+}
+.outfit-info .outfit-neckwear {
+    top: 17%;
+    left: 20px;
+    width: 120px;
+    padding-right: 30px;
+    text-align: right;
+    background-image: var(--dashleft);
+    background-position: right 5px;
+    background-repeat: no-repeat;
+    background-size: 15px 1px;
+}
+.outfit-info .outfit-jacket {
+    top: 30%;
+    left: -10px;
+    width: 120px;
+    padding-right: 30px;
+    text-align: right;
+    background-image: var(--dashleft);;
+    background-position: right 5px;
+    background-repeat: no-repeat;
+    background-size: 15px 1px;
+}
+.outfit-info .outfit-shoes {
+    top: 90%;
+    right: -20px;
+    width: 120px;
+    padding-left: 30px;
+    text-align: left;
+    background-image: var(--dashright);
+    background-position: left 5px;
+    background-repeat: no-repeat;
+    background-size: 15px 1px;
+}
+
+
+@media(min-width: 768px) {
+    .outfit-info .outfit-kilt{
+        top: -38%;
+    }
+    .outfit-info .outfit-flashes{
+        top: -49%;
+    }
+    .outfit-info .outfit-sporran {
+        top: 35%;
+    }
+    .outfit-info .outfit-hose {
+        top: 52%;
+    }
+    .outfit-info .outfit-shirt {
+        top: 10%;
+    }
+    .outfit-info .outfit-neckwear {
+        top: 12%;
+    }
+    .outfit-info .outfit-jacket {
+        top: 20%;
+    }
+    .outfit-info .outfit-shoes {
+        top: 60%;
+    }
+}
+
+
+#outfitDesigner .customcodeWrapper {
+    color: #585830;
+}
+#outfitDesigner .customcodeWrapper > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#outfitDesignerMenu .sendEnquiry {
+    font-size: 1.2rem;
+    padding: 15px 20px;
+    margin-top: 15px;
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+    width: 100%;
+    border-radius: 50px;
+    background: #585830;
+    border: 0;
+    color: #fff;
+    font-family: var(--font-family-body);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+@media(min-width: 768px) {
+    #outfitDesignerMenu .sendEnquiry {
+        width: auto;
+        text-align: left;
+    }
+}
+
+#outfitDesigner #previewimage,
+#outfitDesigner #previewimageMobile {
+    overflow: hidden;
+    width: 370px;
+    min-height: 540px;
+    transition: 400ms ease-out;
+    -webkit-transition: 400ms ease-out;
+    -moz-transition: 400ms ease-out;
+    -o-transition: 400ms ease-out;
+}
+
+#outfitDesigner #previewimageMobile {
+    overflow: auto;
+    position: relative;
+    min-width: auto;
+    width: auto;
+}
+
+#previewWrapperMobile .info-container:has(+ .zoom) {
+    z-index: auto !important;
+}
+
+#outfitDesigner #previewimageMobile img {
+    max-width: none !important;
+}
+
+#outfitDesigner ul.menu_options {
+    margin: 0 0 15px 0;
+    padding: 0;
+}
+
+#outfitDesigner ul.menu_options li {
+    display: inline-block;
+    background: #eeeeee;
+    width: 19.7%;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    cursor: pointer;
+    border: solid 5px #fff;
+}
+#outfitDesigner ul.menu_options li.active {
+    background: #fff;
+    border: solid 5px #585830;
+}
+#outfitDesigner ul.menu_options li img {
+    width: 100%;
+}
+#outfitDesigner ul.menu_options li div {
+    text-align: center;
+    padding: 5px;
+    min-height: 3.5em;
+    line-height: 1em;
+    display: flex;
+    font-size: 95%;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    #outfitDesigner #previewimage,
+    #outfitDesigner #previewimageMobile {
+        min-height: 785px;
+        height: 785px;
+    }
+}
+
+#outfitDesigner #previewimage img {
+    width: 250px;
+}
+
+#outfitDesigner #previewimage.zoom.shoes img {
+    margin-top: -300px;
+}
+
+#outfitDesigner #previewimage {
+    width: 100%;
+    opacity: 1 !important;
+}
+
+#outfitDesigner #previewimage img {
+    margin: auto;
+    height: 100%;
+}
+
+#outfitDesigner #previewimage.zoom img {
+    margin: auto;
+    width: 700px;
+    height: auto;
+    max-width: none;
+}
+
+
+@media all and (max-width: 768px) {
+    .stepno {
+        display: none !important;
+    }
+
+    #outfitDesigner ul.menu_options_parent {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    #outfitDesigner h4.panel-title {
+        text-align: center;
+    }
+
+    #outfitDesigner .outfit-element-menu {
+        margin-bottom: 0;
+    }
+
+    /* put your css styles in here */
+    #outfitDesigner .outfit-element-menu li {
+        width: 100px;
+        height: 100px;
+        margin: -15px 0 15px 0;
+    }
+
+    .outfit-element-menu .swiper-button-options-next {
+        margin-top: -20px;
+    }
+
+    .outfit-element-menu .swiper-button-options-prev {
+        margin-top: -20px;
+    }
+
+    #outfitDesigner #previewimageMobile img {
+        min-width: 250px;
+        min-height: 500px;
+    }
+
+    #outfitDesigner #previewimageMobile.zoom.shoes img,
+    #outfitDesigner #previewimageMobile.zoom.hose img {
+        margin-top: -340px;
+    }
+
+    ul#hirebuytoggle {
+        margin: auto;
+        display: block;
+        width: 216px;
+        margin-bottom: 20px;
+    }
+
+    #outfitDesigner #previewWrapper .preview_container {
+        position: fixed;
+        top: 0;
+
+        right: 100%;
+        z-index: 100;
+        padding: 40px 40px 120px 40px;
+
+        background: #fff;
+        left: -500px;
+        height: 100%;
+        overflow: scroll;
+
+    }
+
+    #outfitDesigner .previewicon {
+        width: 80px;
+        height: 80px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        border-radius: 60px;
+        background-image: var(--ico-view);
+        background-size: 100% 100%;
+        z-index: 110;
+        background-color: #585830;
+        cursor: pointer;
+    }
+
+    #outfitDesigner .preview_container.active {
+        left: 0;
+        right: 0;
+    }
+
+    #outfitDesigner #previewimageMobile {
+        width: 100%;
+        height: 540px;
+        opacity: 1 !important;
+        margin-bottom: 20px;
+    }
+
+    #outfitDesigner #previewimageMobile img {
+        margin: auto;
+        width: auto;
+        height: 100%;
+        aspect-ratio: 0.47;
+        max-width: 942px;
+    }
+
+    #outfitDesigner #previewimageMobile.zoom img {
+        margin: auto;
+        height: 851px;
+        max-width: none;
+        max-height: none;
+    }
+
+    #outfitDesigner .info-container {
+        width: 98%;
+        margin: auto;
+        height: 500px;
+        z-index: 1;
+    }
+
+    .outfit-info .outfit-sporran,
+    .outfit-info .outfit-hose {
+        left: 0;
+    }
+
+    #outfitDesigner ul.menu_options li {
+        width: 200px;
+    }
+}
+
+.zoomout {
+    width: 100px;
+    height: 100px;
+    background-image: var(--icon-zoomout);
+    background-position: right 0px;
+    background-repeat: no-repeat;
+    background-size: 100px 100px;
+    position: absolute;
+    left: 16px;
+    bottom: 1px;
+    cursor: pointer;
+    z-index: 9;
+}
+
+#outfitDesigner .swiperOptions img {
+    width: 100%;
+}
+
+#outfitDesigner .swiperOptions {
+    padding: 0px 30px;
+}
+
+.swiper-button-options-next,
+.swiper-button-next2 {
+    background-image: var(--carousel-next);
+    background-size: 15px 15px;
+    background-color: #fff;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    position: absolute;
+    right: 5px;
+    border: 1px solid black;
+    top: 50%;
+    z-index: 10;
+    margin-top: -25px;
+}
+
+.panel-title .currentlyActive {
+    background: #585830 !important;
+    padding: 5px 10px !important;
+    border-radius: 20px;
+    color: #fff !important;
+}
+
+#outfitDesigner h4.panel-title a.currentlyActive {
+    color: #fff !important;
+}
+
+.swiper-button-options-next {
+    margin-top: -5px;
+}
+
+.swiper-button-options-prev,
+.swiper-button-prev2 {
+    background-image: var(--carousel-prev);
+    background-size: 15px 15px;
+    border-radius: 30px;
+    border: 1px solid black;
+    background-color: #fff;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    z-index: 10;
+    margin-top: -25px;
+}
+
+.swiper-button-options-prev {
+    margin-top: -5px;
+}
+.currentlyActive {
+    font-weight: 500;
+}
+#outfitDesigner .option-group {
+    display: none;
+}
+#outfitDesigner .option-group.active {
+    display: block;
+}
+#outfitDesigner ul.menu_options_parent {
+    margin: 15px 0;
+    padding: 0;
+}
+#outfitDesigner ul.menu_options_parent li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family-body);
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.outfitDesigner .optionTitle {
+    list-style: none !important;
+}
+
+#outfitDesigner .optionTitle h3 {
+    margin-bottom: 0;
+}
+
+#sporran-designer #sporranDesignerMenu {
+    max-width: none !important;
+}
+
+ul.menu_options li {
+    position: relative;
+}
+.newOverlay {
+    background-image: var(--new-overlay);
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    position: absolute;
+}
+.availabilityWarning {
+    font-family: "CeraPRO", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    color: rgb(184, 2, 2);
+    display: block;
+    margin-top: 10px;
+}
+#singleProduct .addtoCart {
+    background: #fff;
+    display: inline-block;
+    padding: 15px 30px;
+    border: 0;
+    margin-top: 25px;
+    color: #000;
+    cursor: pointer;
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: 1px solid #000;
+}
+#singleProduct .addtoCart em {
+    font-style: normal;
+    line-height: 20px;
+}
+.link-box {
+    position: relative;
+    margin-top: 30px;
+    padding: 0 21px;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    overflow: hidden;
+    height: 48px;
+}
+.link-box .link {
+    border: none;
+    background-color: transparent;
+    width: calc(100% - 60px);
+    line-height: 40px;
+    font-size: 90%;
+}
+.link-box .copy-paste {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    padding: 0 20px;
+    line-height: 42px;
+    height: 100%;
+    color: #585830;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: var(--font-family-body);
+}
