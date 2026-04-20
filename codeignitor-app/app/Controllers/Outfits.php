@@ -56,21 +56,17 @@
 		}
 
 		public function getTartanList() {
-			set_time_limit(300);
 
 			$data = [];
-			$outfitData = $this->tartanModel->getTartanList();
-			foreach($outfitData as $k => $v) {
-				if(count($v['family_tartans'])) {
-					array_push($data,
-						[
-							'item_id' => $v["family_id"],
-							'label' => $v["family_name"],
-							'name' => $v["family_name"],
-							'image' => 'L1102045.jpg'
-						]
-					);
-				}
+			$db = \Config\Database::connect();
+			$rows = $db->query("SELECT DISTINCT fn.family_id, fn.family_name FROM family_names fn INNER JOIN tartans t ON t.tartan_parent = fn.family_id ORDER BY fn.family_name ASC")->getResult();
+			foreach($rows as $row) {
+				array_push($data, [
+					'item_id' => $row->family_id,
+					'label'   => $row->family_name,
+					'name'    => $row->family_name,
+					'image'   => 'L1102045.jpg'
+				]);
 			}
 
 			$outputdata['type'] = "builder";
