@@ -27,8 +27,12 @@ RUN echo '<Directory /var/www/html/public/apps>\n\
     Require all granted\n\
 </Directory>' >> /etc/apache2/apache2.conf
 
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 777 /var/www/html/codeignitor-app/writable
+RUN mkdir -p /var/www/html/codeignitor-app/writable/cache \
+    && mkdir -p /var/www/html/codeignitor-app/writable/logs \
+    && mkdir -p /var/www/html/codeignitor-app/writable/session \
+    && mkdir -p /var/www/html/codeignitor-app/writable/uploads \
+    && chmod -R 777 /var/www/html/codeignitor-app/writable \
+    && chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
 
